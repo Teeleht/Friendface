@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Friendface.Core;
 using Friendface.Web.Repositories;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -34,6 +35,11 @@ namespace Friendface.Web
             services.AddTransient<IFriendfaceRepository, FriendfaceSQLRepository>();
             services.AddTransient<FriendfaceService>();
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                options.LoginPath = "/Friendface/Login";
+            });
+
             services.AddMvc();
         }
 
@@ -47,6 +53,9 @@ namespace Friendface.Web
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

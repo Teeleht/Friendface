@@ -15,16 +15,40 @@
     <script src="~/js/signalr.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-primary navbar-expand-lg nav-pills nav-justified">
-        <span class="navbar-brand">Friendface</span>
+    <nav class="navbar navbar-dark navbar-expand-lg nav-pills nav-justified orange">
+        <div class="container-fluid">
+            <span class="navbar-brand text-uppercase big-text"><strong>Friendface</strong></span>
 
-        <div class="navbar-nav">
-            <a class="nav-item nav-link" href="@Url.Action("Index")">Home</a>
-            <a class="nav-item nav-link" href="@Url.Action("Friends")">Friends</a>
-            <a class="nav-item nav-link" href="@Url.Action("Create")">New</a>
-            <a class="nav-item nav-link" href="#">Settings</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link " href="@Url.Action("Index")">Home </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Friends")">Friends</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Create")">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Settings</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Login")">Login</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
+    <div class="row">
+        <hr />
+    </div>
     @RenderBody()
 </body>
 </html>

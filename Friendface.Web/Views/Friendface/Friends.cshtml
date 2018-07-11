@@ -17,11 +17,11 @@
         <tbody>
             @foreach (var friend in Model)
             {
-                <tr>
-                    <td>@friend.Name</td>
-                    <td>@friend.Birthday.ToString("yyyy-MM-dd")</td>
-                    <td>@Html.ActionLink("Details", "Details", new { friendId = friend.Id })</td>
-                </tr>
+            <tr>
+                <td>@friend.Name</td>
+                <td>@friend.Birthday.ToString("yyyy-MM-dd")</td>
+                <td><a href="@Url.Action("Details", new { friendId = friend.Id })">View profile</a></td>
+            </tr>
             }
         </tbody>
     </table>

@@ -2,3 +2,16 @@
     width: 300px;
     height: 150px;
 }
+
+.orange {
+    background-color: #ef5350;
+}
+
+.big-text {
+    font-size: 2rem;
+    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+}
+
+nav .navbar-nav li a {
+    color: white !important;
+}

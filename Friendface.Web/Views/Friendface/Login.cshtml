@@ -1,0 +1,20 @@
+﻿@model Friendface.Web.Models.LoginModel
+
+@{ 
+    Layout = "_Layout";
+}
+
+<div class="container">
+    @using (Html.BeginForm("Login", "Friendface", FormMethod.Post))
+    {
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.Username)</dt>
+            <dd>@Html.TextBoxFor(m => m.Username) @Html.ValidationMessageFor(model => model.Username)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Password)</dt>
+            <dd>@Html.PasswordFor(m => m.Password) @Html.ValidationMessageFor(model => model.Password)</dd>
+        </dl>
+
+        <button type="submit" class="btn btn-secondary" id="submit">Submit</button>
+    }
+</div>

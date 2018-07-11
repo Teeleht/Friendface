@@ -5,6 +5,7 @@ namespace Friendface.Core
 {
     public class Friendface
     {
+        // TODO: gender, address, email, image, age
         public int Id { get; set; }
 
         [Required(ErrorMessage ="Name is required")]
@@ -16,7 +17,5 @@ namespace Friendface.Core
 
         [StringLength(300)]
         public string Description { get; set; }
-
-
     }
 }
