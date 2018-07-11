@@ -16,9 +16,23 @@ namespace Friendface.Web.Repositories
             this.context = context;
         }
 
+        public int Create(string name, DateTime birthday, string description)
+        {
+            var friend = new Core.Friendface
+            {
+                Name = name,
+                Birthday = birthday,
+                Description = description,
+            };
+            context.Friends.Add(friend);
+            context.SaveChanges();
+
+            return friend.Id;
+        }
+
         public List<Core.Friendface> GetActive()
         {
-            throw new NotImplementedException();
+            return context.Friends.ToList();
         }
     }
 }

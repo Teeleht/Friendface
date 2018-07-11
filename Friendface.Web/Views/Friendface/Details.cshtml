@@ -1,0 +1,18 @@
+﻿@model Friendface.Core.Friendface
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <h4>@Model.Name</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>Birthday</dt>
+        <dd>@Model.Birthday.ToString("yyyy-MM-dd")</dd>
+
+        <dt>Description</dt>
+        <dd>@Model.Description</dd>
+    </dl>
+</div>

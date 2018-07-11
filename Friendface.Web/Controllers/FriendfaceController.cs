@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Friendface.Core;
 
 namespace Friendface.Web.Controllers
 {
@@ -32,15 +34,38 @@ namespace Friendface.Web.Controllers
         }
 
         [HttpGet("[action]")]
-        public IActionResult ProfileDetails()
+        public IActionResult Details(int friendId)
         {
-            return View();
+            var friend = friendfaceService.ShowList().First(x => x.Id == friendId);
+            if (friend != null)
+            {
+                return View(friend);
+            }
+            else
+            {
+                throw new Exception("There's no friend with that ID.");
+            }
         }
 
+        [HttpGet("[action]")]
         public IActionResult Create()
         {
-            return View();
+            var friend = new Core.Friendface();
+            return View(friend);
         }
 
+        [HttpPost("[action]")]
+        public IActionResult Create(Core.Friendface friend)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(friend);
+            }
+            else
+            {
+                friendfaceService.Create(friend.Name, friend.Birthday, friend.Description);
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

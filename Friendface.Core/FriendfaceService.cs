@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Friendface.Core
 {
-    class FriendfaceService
+    public class FriendfaceService
     {
         private IFriendfaceRepository friendfaceRepository;
 
@@ -16,6 +16,11 @@ namespace Friendface.Core
         public IEnumerable<Friendface> ShowList()
         {
             return friendfaceRepository.GetActive();
+        }
+
+        public void Create(string name, DateTime birthday, string description)
+        {
+            friendfaceRepository.Create(name, birthday, description);
         }
     }
 }

@@ -1,4 +1,29 @@
-﻿@{
+﻿@model List<Friendface.Core.Friendface>
+
+@{
     Layout = "_Layout";
 }
+
+<div class="container">
+
+    <table class="table" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Birthday</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var friend in Model)
+            {
+                <tr>
+                    <td>@friend.Name</td>
+                    <td>@friend.Birthday.ToString("yyyy-MM-dd")</td>
+                    <td>@Html.ActionLink("Details", "Details", new { friendId = friend.Id })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 

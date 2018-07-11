@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Friendface.Core;
+using Friendface.Web.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,6 +26,14 @@ namespace Friendface.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            
+
+            services.AddDbContext<FriendfaceContext>(options =>
+                   options.UseSqlite(Configuration.GetConnectionString("FriendfaceContext")));
+
+            services.AddTransient<IFriendfaceRepository, FriendfaceSQLRepository>();
+            services.AddTransient<FriendfaceService>();
+
             services.AddMvc();
         }
 

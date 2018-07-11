@@ -6,6 +6,7 @@ namespace Friendface.Core
 {
     public interface IFriendfaceRepository
     {
+        int Create(string name, DateTime birthday, string description);
         List<Friendface> GetActive();
     }
 }
