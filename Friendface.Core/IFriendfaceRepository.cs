@@ -8,6 +8,6 @@ namespace Friendface.Core
     {
         List<Domain.User> GetActive();
 
-        int CreateUser(string username, string password, DateTime birthday, string description, string address, string email);
+        int CreateUser(string username, string password, DateTime birthday, string description, string address, string email, string gender);
     }
 }

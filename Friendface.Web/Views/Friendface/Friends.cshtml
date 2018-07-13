@@ -11,6 +11,7 @@
             <tr>
                 <th>Name</th>
                 <th>Birthday</th>
+                <th>Gender</th>
                 <th></th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@
             <tr>
                 <td>@friend.Username</td>
                 <td>@friend.Birthday.ToString("yyyy-MM-dd")</td>
+                <td>@friend.Gender</td>
                 <td><a href="@Url.Action("Details", new { friendId = friend.Id })">View profile</a></td>
             </tr>
             }

@@ -18,9 +18,9 @@ namespace Friendface.Core
             return friendfaceRepository.GetActive();
         }
 
-        public void CreateUser(string username, string password, DateTime birthday, string description, string address, string email)
+        public void CreateUser(string username, string password, DateTime birthday, string description, string address, string email, string gender)
         {
-            friendfaceRepository.CreateUser(username, password, birthday, description, address, email);
+            friendfaceRepository.CreateUser(username, password, birthday, description, address, email, gender);
         }
     }
 }

@@ -3,14 +3,16 @@ using System;
 using Friendface.Web.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Friendface.Web.Migrations
 {
     [DbContext(typeof(FriendfaceContext))]
-    partial class FriendfaceContextModelSnapshot : ModelSnapshot
+    [Migration("20180713091002_BetterModel")]
+    partial class BetterModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,8 +72,6 @@ namespace Friendface.Web.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired();
-
-                    b.Property<string>("Gender");
 
                     b.Property<string>("Password")
                         .IsRequired();

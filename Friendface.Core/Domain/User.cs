@@ -25,6 +25,7 @@ namespace Friendface.Core.Domain
 
         [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; }
+        public string Gender { get; set; }
         public List<Post> Posts { get; set; }
         public List<Comment> Comments { get; set; }
         public List<User> Friends { get; set; }

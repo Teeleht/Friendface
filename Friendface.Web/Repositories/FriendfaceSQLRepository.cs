@@ -16,7 +16,7 @@ namespace Friendface.Web.Repositories
             this.context = context;
         }
 
-        public int CreateUser(string username, string password, DateTime birthday, string description, string address, string email)
+        public int CreateUser(string username, string password, DateTime birthday, string description, string address, string email, string gender)
         {
             var user = new Core.Domain.User
             {
@@ -26,6 +26,7 @@ namespace Friendface.Web.Repositories
                 Description = description,
                 Address = address,
                 Email = email,
+                Gender = gender,
             };
             context.Users.Add(user);
             context.SaveChanges();

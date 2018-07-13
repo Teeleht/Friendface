@@ -67,7 +67,7 @@ namespace Friendface.Web.Controllers
             }
             else
             {
-                friendfaceService.CreateUser(user.Username, user.Password, user.Birthday, user.Description, user.Address, user.Email);
+                friendfaceService.CreateUser(user.Username, user.Password, user.Birthday, user.Description, user.Address, user.Email, user.Gender);
                 return RedirectToAction("Index");
             }
         }
