@@ -40,6 +40,15 @@ namespace Friendface.Web
                 options.LoginPath = "/Friendface/Login";
             });
 
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+            });
+
             services.AddMvc();
         }
 
@@ -56,6 +65,8 @@ namespace Friendface.Web
 
             app.UseCookiePolicy();
             app.UseAuthentication();
+
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

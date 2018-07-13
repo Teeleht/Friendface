@@ -61,7 +61,7 @@ namespace Friendface.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult RegisterUser(Core.Domain.User user)
+        public IActionResult RegisterUser(User user)
         {
             if (!ModelState.IsValid)
             {
@@ -125,9 +125,9 @@ namespace Friendface.Web.Controllers
                 };
 
                 await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity),
-                authProperties);
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity),
+                    authProperties);
 
                 return RedirectToAction("Index");
             }
@@ -138,17 +138,12 @@ namespace Friendface.Web.Controllers
 
         }
 
-        /*[HttpGet]
-        public IActionResult RegisterUser()
-        {
-            return View();
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {           
+            await HttpContext.SignOutAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index");
         }
-
-        [HttpPost]
-        public IActionResult RegisterUser(RegistrationViewModel register)
-        {
-
-            return View();
-        }*/
     }
 }
