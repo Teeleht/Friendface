@@ -28,6 +28,6 @@ namespace Friendface.Core.Domain
         public string Gender { get; set; }
         public List<Post> Posts { get; set; }
         public List<Comment> Comments { get; set; }
-        public List<User> Friends { get; set; }
+        public List<Friendship> Friendships { get; set; }
     }
 }

@@ -1,0 +1,28 @@
+﻿@model Friendface.Core.Domain.User
+@{
+    Layout = "_Layout";
+}
+
+<div class="container">
+
+    <table class="table" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Birthday</th>
+                <th>Gender</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var friendship in Model.Friendships)
+            {
+                <tr>
+                    <td>@friendship.UserA.Username</td>
+                    <td>@friendship.UserA.Birthday</td>
+                    <td>@friendship.UserA.Gender</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Friendface.Core.Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,19 @@ namespace Friendface.Web.Repositories
                : base(options)
         {
         }
-        public DbSet<Core.Domain.User> Users { get; set; }
-        public DbSet<Core.Domain.Post> Posts { get; set; }
-        public DbSet<Core.Domain.Comment> Comments { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Friendship> Friendships { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>().HasMany<Friendship>(x => x.Friendships);
+            modelBuilder.Entity<Friendship>().HasOne<User>(x => x.UserA);
+            modelBuilder.Entity<Friendship>().HasOne<User>(x => x.UserB);
+
+
+        }
+
     }
 }

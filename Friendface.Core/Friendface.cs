@@ -8,7 +8,7 @@ namespace Friendface.Core
         // TODO: gender, address, email, image, age
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="Name is required")]
+        /*[Required(ErrorMessage ="Name is required")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Birthday is required")]
@@ -16,6 +16,6 @@ namespace Friendface.Core
         public DateTime Birthday { get; set; }
 
         [StringLength(300)]
-        public string Description { get; set; }
+        public string Description { get; set; }*/
     }
 }

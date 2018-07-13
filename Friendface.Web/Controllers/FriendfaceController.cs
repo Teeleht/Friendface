@@ -54,6 +54,13 @@ namespace Friendface.Web.Controllers
         }
 
         [HttpGet]
+        public IActionResult AddedFriends()
+        {
+            
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult RegisterUser()
         {
             var user = new User();
@@ -145,5 +152,7 @@ namespace Friendface.Web.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index");
         }
+
+        
     }
 }

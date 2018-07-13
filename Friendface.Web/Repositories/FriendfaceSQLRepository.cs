@@ -1,4 +1,5 @@
 ﻿using Friendface.Core;
+using Friendface.Core.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,24 @@ namespace Friendface.Web.Repositories
             this.context = context;
         }
 
+        public int CreateFriendship(User userA, User userB, DateTime added)
+        {
+            var friendship = new Friendship
+            {
+                UserA = userA,
+                UserB = userB,
+                Added = added,
+            };
+
+            context.Friendships.Add(friendship);
+            context.SaveChanges();
+
+            return friendship.Id;
+        }
+
         public int CreateUser(string username, string password, DateTime birthday, string description, string address, string email, string gender)
         {
-            var user = new Core.Domain.User
+            var user = new User
             {
                 Username = username,
                 Password = password,

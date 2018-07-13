@@ -16,13 +16,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var friend in Model)
+            @foreach (var user in Model)
             {
             <tr>
-                <td>@friend.Username</td>
-                <td>@friend.Birthday.ToString("yyyy-MM-dd")</td>
-                <td>@friend.Gender</td>
-                <td><a href="@Url.Action("Details", new { friendId = friend.Id })">View profile</a></td>
+                <td>@user.Username</td>
+                <td>@user.Birthday.ToString("yyyy-MM-dd")</td>
+                <td>@user.Gender</td>
+                <td><a href="@Url.Action("Details", new { friendId = user.Id })">View profile</a></td>
             </tr>
             }
         </tbody>
