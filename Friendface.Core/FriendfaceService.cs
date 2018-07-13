@@ -13,14 +13,14 @@ namespace Friendface.Core
             this.friendfaceRepository = friendfaceRepository;
         }
 
-        public IEnumerable<Friendface> ShowList()
+        public IEnumerable<Domain.User> ShowList()
         {
             return friendfaceRepository.GetActive();
         }
 
-        public void Create(string name, DateTime birthday, string description)
+        public void CreateUser(string username, string password, DateTime birthday, string description, string address, string email)
         {
-            friendfaceRepository.Create(name, birthday, description);
+            friendfaceRepository.CreateUser(username, password, birthday, description, address, email);
         }
     }
 }

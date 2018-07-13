@@ -16,23 +16,26 @@ namespace Friendface.Web.Repositories
             this.context = context;
         }
 
-        public int Create(string name, DateTime birthday, string description)
+        public int CreateUser(string username, string password, DateTime birthday, string description, string address, string email)
         {
-            var friend = new Core.Friendface
+            var user = new Core.Domain.User
             {
-                Name = name,
+                Username = username,
+                Password = password,
                 Birthday = birthday,
                 Description = description,
+                Address = address,
+                Email = email,
             };
-            context.Friends.Add(friend);
+            context.Users.Add(user);
             context.SaveChanges();
 
-            return friend.Id;
+            return user.Id;
         }
 
-        public List<Core.Friendface> GetActive()
+        public List<Core.Domain.User> GetActive()
         {
-            return context.Friends.ToList();
+            return context.Users.ToList();
         }
     }
 }

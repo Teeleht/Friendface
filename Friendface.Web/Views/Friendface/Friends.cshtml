@@ -1,4 +1,4 @@
-﻿@model List<Friendface.Core.Friendface>
+﻿@model List<Friendface.Core.Domain.User>
 
 @{
     Layout = "_Layout";
@@ -18,7 +18,7 @@
             @foreach (var friend in Model)
             {
             <tr>
-                <td>@friend.Name</td>
+                <td>@friend.Username</td>
                 <td>@friend.Birthday.ToString("yyyy-MM-dd")</td>
                 <td><a href="@Url.Action("Details", new { friendId = friend.Id })">View profile</a></td>
             </tr>

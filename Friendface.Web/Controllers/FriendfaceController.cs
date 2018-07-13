@@ -52,22 +52,22 @@ namespace Friendface.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult RegisterUser()
         {
-            var friend = new Core.Friendface();
-            return View(friend);
+            var user = new Core.Domain.User();
+            return View(user);
         }
 
         [HttpPost]
-        public IActionResult Create(Core.Friendface friend)
+        public IActionResult RegisterUser(Core.Domain.User user)
         {
             if (!ModelState.IsValid)
             {
-                return View(friend);
+                return View(user);
             }
             else
             {
-                friendfaceService.Create(friend.Name, friend.Birthday, friend.Description);
+                friendfaceService.CreateUser(user.Username, user.Password, user.Birthday, user.Description, user.Address, user.Email);
                 return RedirectToAction("Index");
             }
         }
@@ -132,5 +132,18 @@ namespace Friendface.Web.Controllers
             }
 
         }
+
+        /*[HttpGet]
+        public IActionResult RegisterUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult RegisterUser(RegistrationViewModel register)
+        {
+
+            return View();
+        }*/
     }
 }

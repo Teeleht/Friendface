@@ -12,7 +12,8 @@ namespace Friendface.Web.Repositories
                : base(options)
         {
         }
-
-        public DbSet<Core.Friendface> Friends { get; set; }
+        public DbSet<Core.Domain.User> Users { get; set; }
+        public DbSet<Core.Domain.Post> Posts { get; set; }
+        public DbSet<Core.Domain.Comment> Comments { get; set; }
     }
 }
