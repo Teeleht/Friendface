@@ -9,10 +9,12 @@ using Friendface.Web.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Friendface.Core.Domain;
+using Microsoft.AspNetCore.Http;
 
 namespace Friendface.Web.Controllers
 {
-// logout, login nupud, nimi sisselogimisel, home'i tagasi
+// logout, login nupud, nimi sisselogimisel
     [Authorize]
     public class FriendfaceController : Controller
     {
@@ -54,7 +56,7 @@ namespace Friendface.Web.Controllers
         [HttpGet]
         public IActionResult RegisterUser()
         {
-            var user = new Core.Domain.User();
+            var user = new User();
             return View(user);
         }
 
@@ -81,15 +83,18 @@ namespace Friendface.Web.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginModel login)
+        public async Task<IActionResult> Login(RegistrationViewModel login)
         {
-            if (login.Username == "Teele" && login.Password == "111")
+            User user = friendfaceService.ShowList().First(x => x.Username == login.Username && x.Password == login.Password);
+
+            if (user != null)
             {
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, login.Username),
                     new Claim(ClaimTypes.Role, "Administrator"),
                 };
+
 
                 var claimsIdentity = new ClaimsIdentity(
                 claims, CookieAuthenticationDefaults.AuthenticationScheme);
