@@ -67,10 +67,10 @@ namespace Friendface.Web.Controllers
         // create new friendship
 
         [HttpPost]
-        public IActionResult CreateFriendship(User friend)
+        public IActionResult CreateFriendship(DetailModel model)
         {
             //friendfaceService.ClearFriends(); // clear database
-            var userB = friendfaceService.ShowList().First(x => x.Id == friend.Id);
+            var userB = friendfaceService.ShowList().First(x => x.Id == model.User.Id);
             var userA = friendfaceService.ShowList().First(x => x.Username == User.Identity.Name);
                 
             friendfaceService.CreateFriendship(userA, userB, DateTime.Now);
@@ -80,6 +80,7 @@ namespace Friendface.Web.Controllers
 
         // create new user
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult RegisterUser()
         {
             var user = new User();
@@ -87,6 +88,7 @@ namespace Friendface.Web.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult RegisterUser(User user)
         {
             if (!ModelState.IsValid)

@@ -57,6 +57,11 @@ namespace Friendface.Web
         {
             app.UseStaticFiles();
 
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetService<FriendfaceContext>();
+                context.Database.Migrate();
+            }
 
             if (env.IsDevelopment())
             {
