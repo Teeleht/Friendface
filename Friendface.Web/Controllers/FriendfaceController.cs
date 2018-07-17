@@ -41,17 +41,19 @@ namespace Friendface.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int friendId)
+        public IActionResult Details(int userId)
         {
-            var friend = friendfaceService.ShowList().First(x => x.Id == friendId);
-            if (friend != null)
+            var friend = friendfaceService.GetUser(userId);
+            var user = friendfaceService.GetUser(User.Identity.Name);
+
+            var areFriends = friendfaceService.AreFriends(user.Id, friend.Id);
+            var model = new DetailModel
             {
-                return View(friend);
-            }
-            else
-            {
-                throw new Exception("There's no friend with that ID.");
-            }
+                IsFriend = areFriends,
+                User = friend,
+            };
+            return View(model);
+
         }
 
         // added friends
@@ -67,7 +69,7 @@ namespace Friendface.Web.Controllers
         [HttpPost]
         public IActionResult CreateFriendship(User friend)
         {
-            friendfaceService.ClearFriends();
+            //friendfaceService.ClearFriends(); // clear database
             var userB = friendfaceService.ShowList().First(x => x.Id == friend.Id);
             var userA = friendfaceService.ShowList().First(x => x.Username == User.Identity.Name);
                 

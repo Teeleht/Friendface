@@ -69,5 +69,11 @@ namespace Friendface.Web.Repositories
             context.Friendships.RemoveRange(context.Friendships);
             context.SaveChanges();
         }
+
+        public User GetUserById(int id)
+        {
+            return context.Users.First(x => x.Id == id);
+        }
+
     }
 }

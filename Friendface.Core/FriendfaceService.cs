@@ -1,6 +1,7 @@
 ﻿using Friendface.Core.Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Friendface.Core
@@ -37,6 +38,20 @@ namespace Friendface.Core
         public void ClearFriends()
         {
             friendfaceRepository.Clear();
+        }
+
+        public bool AreFriends(int friendId, int userId)
+        {
+            return friendfaceRepository.GetFriendships().Any(x => x.UserA.Id == friendId && x.UserB.Id == userId || x.UserA.Id == userId && x.UserB.Id == friendId);
+        }
+
+        public User GetUser(int id)
+        {
+            return friendfaceRepository.GetUserById(id);
+        }
+        public User GetUser(string username)
+        {
+            return friendfaceRepository.GetActive().First(x => x.Username == username);
         }
     }
 }

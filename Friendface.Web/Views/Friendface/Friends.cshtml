@@ -22,7 +22,7 @@
                 <td>@user.Username</td>
                 <td>@user.Birthday.ToString("yyyy-MM-dd")</td>
                 <td>@user.Gender</td>
-                <td><a href="@Url.Action("Details", new { friendId = user.Id })">View profile</a></td>
+                <td><a href="@Url.Action("Details", new { userId = user.Id })">View profile</a></td>
             </tr>
             }
         </tbody>

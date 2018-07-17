@@ -1,32 +1,46 @@
-﻿@model Friendface.Core.Domain.User
+﻿@model Friendface.Web.Models.DetailModel
+
 
 @{
     Layout = "_Layout";
 }
 
+
+
 <div class="container">
-    <h4>@Model.Username</h4>
+    <h4>@Model.User.Username</h4>
+
     <hr />
     <dl class="dl-horizontal">
 
         <dt>Birthday</dt>
-        <dd>@Model.Birthday.ToString("yyyy-MM-dd")</dd>
+        <dd>@Model.User.Birthday.ToString("yyyy-MM-dd")</dd>
 
         <dt>Email</dt>
-        <dd>@Model.Email</dd>
+        <dd>@Model.User.Email</dd>
 
         <dt>Address</dt>
-        <dd>@Model.Address</dd>
+        <dd>@Model.User.Address</dd>
 
         <dt>Gender</dt>
-        <dd>@Model.Gender</dd>
+        <dd>@Model.User.Gender</dd>
 
         <dt>Description</dt>
-        <dd>@Model.Description</dd>
+        <dd>@Model.User.Description</dd>
     </dl>
-    @using (Html.BeginForm("CreateFriendship", "Friendface", FormMethod.Post))
+
+    @if (Model.IsFriend)
     {
-        @Html.HiddenFor(x => x.Id)
-        <button type="submit" class="btn btn-secondary">Add friend</button>
+        <p>Friends</p>
     }
+    else
+    {
+        using (Html.BeginForm("CreateFriendship", "Friendface", FormMethod.Post))
+        {
+            @Html.HiddenFor(x => x.User.Id)
+
+            <button type="submit" class="btn btn-secondary">Add friend</button>
+        }
+    }
+
 </div>
