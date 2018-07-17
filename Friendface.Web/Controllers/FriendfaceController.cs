@@ -29,7 +29,15 @@ namespace Friendface.Web.Controllers
         public IActionResult Index()
         {
             var user = friendfaceService.GetUser(User.Identity.Name);
-            return View(user);
+            var friendships = friendfaceService.ShowFriendships().Where(x => x.UserA.Id == user.Id || x.UserB.Id == user.Id);
+
+            var model = new IndexModel
+            {
+                User = user,
+                Friendships = friendships,
+            };
+
+            return View(model);
         }
 
         // all users

@@ -1,4 +1,4 @@
-﻿@model Friendface.Core.Domain.User
+﻿@model Friendface.Web.Models.IndexModel
 
 @{
     Layout = "_Layout";
@@ -7,12 +7,30 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <h2>@Model.Username</h2>
+            <h2>@Model.User.Username</h2>
+
+            <p>@Model.User.Email</p>
+            <p>@Model.User.Birthday</p>
+            <p>@Model.User.Address</p>
+            <p>@Model.User.Gender</p>
         </div>
         <div class="col-md-4">
-            <h4>My friends</h4>
 
-            <a class="nav-link" href="@Url.Action("AddedFriends")">Friends</a>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <h4>My friends</h4>
+                    <span class="badge badge-primary badge-pill">@Model.Friendships.Count()</span>
+                </li>
+
+                @foreach (var friendship in Model.Friendships)
+                {
+                    <li class="list-group-item">
+                        <a href="@Url.Action("Details", new { userId = friendship.UserB.Id })">@friendship.UserB.Username</a>
+                    </li>
+                }
+            </ul>
+
+            <a class="nav-link" href="@Url.Action("AddedFriends")">All friendships</a>
         </div>
     </div>
 </div>
