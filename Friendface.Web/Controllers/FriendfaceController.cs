@@ -63,25 +63,17 @@ namespace Friendface.Web.Controllers
         }
 
         // create new friendship
-        [HttpGet]
-        public IActionResult CreateFriendship()
-        {
-            var friendship = new Friendship();
-            return View(friendship);
-        }
 
         [HttpPost]
-        public IActionResult CreateFriendship(Friendship friendship)
+        public IActionResult CreateFriendship(User friend)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(friendship);
-            }
-            else
-            {
-                friendfaceService.CreateFriendship(friendship.UserA, friendship.UserB, DateTime.Now);
-                return RedirectToAction("Index");
-            }
+            friendfaceService.ClearFriends();
+            var userB = friendfaceService.ShowList().First(x => x.Id == friend.Id);
+            var userA = friendfaceService.ShowList().First(x => x.Username == User.Identity.Name);
+                
+            friendfaceService.CreateFriendship(userA, userB, DateTime.Now);
+            return RedirectToAction("Index");
+
         }
 
         // create new user

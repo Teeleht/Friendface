@@ -1,5 +1,6 @@
 ﻿using Friendface.Core;
 using Friendface.Core.Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,16 @@ namespace Friendface.Web.Repositories
 
         public List<Friendship> GetFriendships()
         {
-            return context.Friendships.ToList();
+            return context.Friendships
+                .Include(x => x.UserA)
+                .Include(x => x.UserB)
+                .ToList();
+        }
+
+        public void Clear()
+        {
+            context.Friendships.RemoveRange(context.Friendships);
+            context.SaveChanges();
         }
     }
 }

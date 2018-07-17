@@ -18,8 +18,8 @@
                 @foreach (var friendship in Model)
                 {
                     <tr>
-                        <td>@friendship.UserA</td>
-                        <td>@friendship.UserB</td>
+                        <td>@friendship.UserA.Username</td>
+                        <td>@friendship.UserB.Username</td>
                         <td>@friendship.Added.ToString("yyyy-MM-dd")</td>
                     </tr>
                 }

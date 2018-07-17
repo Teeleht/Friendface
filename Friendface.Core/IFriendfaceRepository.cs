@@ -12,5 +12,6 @@ namespace Friendface.Core
         int CreateFriendship(User userA, User userB, DateTime added);
 
         List<Friendship> GetFriendships();
+        void Clear();
     }
 }

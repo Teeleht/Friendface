@@ -24,8 +24,9 @@
         <dt>Description</dt>
         <dd>@Model.Description</dd>
     </dl>
-    @using (Html.BeginForm("CreateFriendship", "Friendface", FormMethod.Post, new { friendId = Model.Id }))
+    @using (Html.BeginForm("CreateFriendship", "Friendface", FormMethod.Post))
     {
+        @Html.HiddenFor(x => x.Id)
         <button type="submit" class="btn btn-secondary">Add friend</button>
     }
 </div>

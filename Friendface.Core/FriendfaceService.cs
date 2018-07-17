@@ -33,5 +33,10 @@ namespace Friendface.Core
         {
             friendfaceRepository.CreateFriendship(userA, userB, added);
         }
+
+        public void ClearFriends()
+        {
+            friendfaceRepository.Clear();
+        }
     }
 }
