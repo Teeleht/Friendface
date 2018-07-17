@@ -1,4 +1,4 @@
-﻿@model Friendface.Core.Domain.User
+﻿@model List<Friendface.Core.Domain.Friendship>
 @{
     Layout = "_Layout";
 }
@@ -8,21 +8,22 @@
     <table class="table" style="width:100%">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Birthday</th>
-                <th>Gender</th>
-                <th></th>
+                <th>UserA</th>
+                <th>UserB</th>
+                <th>Friends since</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var friendship in Model.Friendships)
-            {
-                <tr>
-                    <td>@friendship.UserA.Username</td>
-                    <td>@friendship.UserA.Birthday</td>
-                    <td>@friendship.UserA.Gender</td>
-                </tr>
-            }
-        </tbody>
+            <tr>
+                @foreach (var friendship in Model)
+                {
+                    <tr>
+                        <td>@friendship.UserA</td>
+                        <td>@friendship.UserB</td>
+                        <td>@friendship.Added.ToString("yyyy-MM-dd")</td>
+                    </tr>
+                }
+
+            </tbody>
     </table>
 </div>

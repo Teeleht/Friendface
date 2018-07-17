@@ -31,6 +31,7 @@ namespace Friendface.Web.Controllers
             return View();
         }
 
+        // all users
         [HttpGet]
         public IActionResult Friends()
         {
@@ -53,13 +54,37 @@ namespace Friendface.Web.Controllers
             }
         }
 
+        // added friends
         [HttpGet]
         public IActionResult AddedFriends()
         {
-            
-            return View();
+            var friendships = friendfaceService.ShowFriendships();
+            return View(friendships);
         }
 
+        // create new friendship
+        [HttpGet]
+        public IActionResult CreateFriendship()
+        {
+            var friendship = new Friendship();
+            return View(friendship);
+        }
+
+        [HttpPost]
+        public IActionResult CreateFriendship(Friendship friendship)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(friendship);
+            }
+            else
+            {
+                friendfaceService.CreateFriendship(friendship.UserA, friendship.UserB, DateTime.Now);
+                return RedirectToAction("Index");
+            }
+        }
+
+        // create new user
         [HttpGet]
         public IActionResult RegisterUser()
         {

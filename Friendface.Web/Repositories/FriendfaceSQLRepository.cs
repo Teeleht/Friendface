@@ -50,9 +50,14 @@ namespace Friendface.Web.Repositories
             return user.Id;
         }
 
-        public List<Core.Domain.User> GetActive()
+        public List<User> GetActive()
         {
             return context.Users.ToList();
+        }
+
+        public List<Friendship> GetFriendships()
+        {
+            return context.Friendships.ToList();
         }
     }
 }

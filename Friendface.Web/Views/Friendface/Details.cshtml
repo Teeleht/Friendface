@@ -24,6 +24,8 @@
         <dt>Description</dt>
         <dd>@Model.Description</dd>
     </dl>
-
-    <button type="submit" class="btn btn-secondary">Add Friend</button>
+    @using (Html.BeginForm("CreateFriendship", "Friendface", FormMethod.Post, new { friendId = Model.Id }))
+    {
+        <button type="submit" class="btn btn-secondary">Add friend</button>
+    }
 </div>
