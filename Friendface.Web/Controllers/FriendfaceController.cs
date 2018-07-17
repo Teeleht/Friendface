@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Friendface.Web.Controllers
 {
-// logout, login nupud, nimi sisselogimisel
+    // TODO: profiil index lehele koos sõprade nimekirjaga, unfriend
     [Authorize]
     public class FriendfaceController : Controller
     {
@@ -28,7 +28,8 @@ namespace Friendface.Web.Controllers
         [Route("")]
         public IActionResult Index()
         {
-            return View();
+            var user = friendfaceService.GetUser(User.Identity.Name);
+            return View(user);
         }
 
         // all users
@@ -47,10 +48,18 @@ namespace Friendface.Web.Controllers
             var user = friendfaceService.GetUser(User.Identity.Name);
 
             var areFriends = friendfaceService.AreFriends(user.Id, friend.Id);
+            var isMe = false;
+
+            if (friend == user)
+            {
+                isMe = true;
+            }
+
             var model = new DetailModel
             {
                 IsFriend = areFriends,
                 User = friend,
+                IsMe = isMe,     
             };
             return View(model);
 
@@ -65,11 +74,11 @@ namespace Friendface.Web.Controllers
         }
 
         // create new friendship
-
         [HttpPost]
         public IActionResult CreateFriendship(DetailModel model)
         {
             //friendfaceService.ClearFriends(); // clear database
+            //friendfaceService.ClearUsers();
             var userB = friendfaceService.ShowList().First(x => x.Id == model.User.Id);
             var userA = friendfaceService.ShowList().First(x => x.Username == User.Identity.Name);
                 

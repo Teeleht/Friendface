@@ -37,7 +37,12 @@ namespace Friendface.Core
 
         public void ClearFriends()
         {
-            friendfaceRepository.Clear();
+            friendfaceRepository.ClearFriends();
+        }
+
+        public void ClearUsers()
+        {
+            friendfaceRepository.ClearUsers();
         }
 
         public bool AreFriends(int friendId, int userId)

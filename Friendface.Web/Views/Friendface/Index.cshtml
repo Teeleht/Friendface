@@ -1,10 +1,18 @@
-﻿@model Friendface.Web.Models.LoginModel
+﻿@model Friendface.Core.Domain.User
 
 @{
     Layout = "_Layout";
 }
 
-<div>
-    <p> Tere! </p>
-    <a class="nav-link" href="@Url.Action("AddedFriends")">Friends</a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>@Model.Username</h2>
+        </div>
+        <div class="col-md-4">
+            <h4>My friends</h4>
+
+            <a class="nav-link" href="@Url.Action("AddedFriends")">Friends</a>
+        </div>
+    </div>
 </div>

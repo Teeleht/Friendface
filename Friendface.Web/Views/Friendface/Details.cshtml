@@ -33,6 +33,10 @@
     {
         <p>Friends</p>
     }
+    else if (Model.IsMe)
+    {
+        <p></p>
+    }
     else
     {
         using (Html.BeginForm("CreateFriendship", "Friendface", FormMethod.Post))

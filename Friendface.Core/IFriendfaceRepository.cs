@@ -11,7 +11,8 @@ namespace Friendface.Core
         int CreateUser(string username, string password, DateTime birthday, string description, string address, string email, string gender);
         int CreateFriendship(User userA, User userB, DateTime added);
         List<Friendship> GetFriendships();
-        void Clear();
+        void ClearFriends();
+        void ClearUsers();
         User GetUserById(int id);
     }
 }

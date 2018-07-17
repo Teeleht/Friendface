@@ -64,9 +64,15 @@ namespace Friendface.Web.Repositories
                 .ToList();
         }
 
-        public void Clear()
+        public void ClearFriends()
         {
             context.Friendships.RemoveRange(context.Friendships);
+            context.SaveChanges();
+        }
+
+        public void ClearUsers()
+        {
+            context.Users.RemoveRange(context.Users);
             context.SaveChanges();
         }
 
