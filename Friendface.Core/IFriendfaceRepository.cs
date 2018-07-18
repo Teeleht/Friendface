@@ -14,5 +14,6 @@ namespace Friendface.Core
         void ClearFriends();
         void ClearUsers();
         User GetUserById(int id);
+        void Update(User user);
     }
 }

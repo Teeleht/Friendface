@@ -87,12 +87,45 @@ namespace Friendface.Web.Controllers
         {
             //friendfaceService.ClearFriends(); // clear database
             //friendfaceService.ClearUsers();
-            var userB = friendfaceService.ShowList().First(x => x.Id == model.User.Id);
-            var userA = friendfaceService.ShowList().First(x => x.Username == User.Identity.Name);
+            var userB = friendfaceService.GetUser(model.User.Id);
+            var userA = friendfaceService.GetUser(User.Identity.Name);
                 
             friendfaceService.CreateFriendship(userA, userB, DateTime.Now);
             return RedirectToAction("Index");
 
+        }
+
+        [HttpGet]
+        public IActionResult ChangeProfile()
+        {
+            var user = friendfaceService.GetUser(User.Identity.Name);
+            var model = new ChangeProfileModel
+            {
+                Id = user.Id,
+                Username = user.Username,
+                Password = user.Password,
+                Email = user.Email,
+                Address = user.Address,
+                Birthday = user.Birthday,
+                Description = user.Description,
+                Gender = user.Gender,
+
+        };
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult ChangeProfile(ChangeProfileModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            else
+            {
+                friendfaceService.ChangeProfile(model.Id);
+                return RedirectToAction("Index");
+            }
         }
 
         // create new user

@@ -81,5 +81,18 @@ namespace Friendface.Web.Repositories
             return context.Users.First(x => x.Id == id);
         }
 
+        public void Update(User user)
+        {
+            var u = context.Users.First(x => x.Id == user.Id);
+
+            u.Username = user.Username;
+            u.Password = user.Password;
+            u.Email = user.Email;
+            u.Address = user.Address;
+            u.Birthday = user.Birthday;
+            u.Description = user.Description;
+            u.Gender = user.Gender;           
+        }
+
     }
 }

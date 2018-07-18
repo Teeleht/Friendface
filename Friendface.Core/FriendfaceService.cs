@@ -58,5 +58,12 @@ namespace Friendface.Core
         {
             return friendfaceRepository.GetActive().First(x => x.Username == username);
         }
+
+        public void ChangeProfile(int id)
+        {
+            var user = friendfaceRepository.GetUserById(id);
+
+            friendfaceRepository.Update(user);
+        } 
     }
 }
