@@ -4,6 +4,7 @@
 }
 
 <div class="container">
+    <h3>Friendships</h3>
 
     <table class="table" style="width:100%">
         <thead>
@@ -17,13 +18,13 @@
             <tr>
                 @foreach (var friendship in Model)
                 {
-                    <tr>
-                        <td>@friendship.UserA.Username</td>
-                        <td>@friendship.UserB.Username</td>
-                        <td>@friendship.Added.ToString("yyyy-MM-dd")</td>
-                    </tr>
-                }
+                <tr>
+                    <td>@friendship.UserA.Username</td>
+                    <td>@friendship.UserB.Username</td>
+                    <td>@friendship.Added.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
 
             </tbody>
-    </table>
-</div>
+        </table>
+    </div>

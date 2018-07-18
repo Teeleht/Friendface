@@ -31,6 +31,65 @@
             </ul>
 
             <a class="nav-link" href="@Url.Action("AddedFriends")">All friendships</a>
+
+            <div class="row">
+                <div class="input-group">
+                    <input id="messageInput" />
+                    <div class="input-group-append">
+                        <button id="sendButton" class="btn btn-secondary btn-sm">Send</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row border h-100 d-inline-block" style="min-width: 240px">
+                <div>
+                    <ul id="messagesList" style="list-style-type:none"></ul>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chatHub")
+        .build();
+
+    connection.on("ReceiveMessage", (user, message, time) => {
+        const msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        const data = time + " " + user + ": ";
+        const encodedMsg = msg;
+
+        const li_data = document.createElement("li");
+        li_data.className = "font-weight-bold";
+        li_data.textContent = data;
+
+        const li_msg = document.createElement("li");
+        li_msg.textContent = msg;
+        document.getElementById("messagesList").appendChild(li_data);
+        document.getElementById("messagesList").appendChild(li_msg);
+
+        $('#messageInput').val('').focus();
+    });
+
+    connection.start().catch(err => console.error(err.toString()));
+
+    function OnEvent() {
+        const message = document.getElementById("messageInput").value;
+        connection.invoke("SendMessage", message).catch(err => console.error(err.toString()));
+    }
+
+    document.getElementById("sendButton").addEventListener("click", event => {       
+        event.preventDefault();
+        OnEvent();
+    });
+
+    $(document).keypress(function (event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            OnEvent();
+        }
+    });
+
+
+</script>

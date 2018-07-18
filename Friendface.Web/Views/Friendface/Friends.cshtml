@@ -5,6 +5,7 @@
 }
 
 <div class="container">
+    <h3>Users</h3>
 
     <table class="table" style="width:100%">
         <thead>
@@ -18,12 +19,12 @@
         <tbody>
             @foreach (var user in Model)
             {
-            <tr>
-                <td>@user.Username</td>
-                <td>@user.Birthday.ToString("yyyy-MM-dd")</td>
-                <td>@user.Gender</td>
-                <td><a href="@Url.Action("Details", new { userId = user.Id })">View profile</a></td>
-            </tr>
+                <tr>
+                    <td>@user.Username</td>
+                    <td>@user.Birthday.ToString("yyyy-MM-dd")</td>
+                    <td>@user.Gender</td>
+                    <td><a href="@Url.Action("Details", new { userId = user.Id })">View profile</a></td>
+                </tr>
             }
         </tbody>
     </table>

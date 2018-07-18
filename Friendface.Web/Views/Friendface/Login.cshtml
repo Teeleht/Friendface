@@ -5,6 +5,9 @@
 }
 
 <div class="container">
+    <h3>Login</h3>
+    <hr />
+
     @using (Html.BeginForm("Login", "Friendface", FormMethod.Post))
     {
         <dl class="dl-horizontal">
@@ -15,6 +18,10 @@
             <dd>@Html.PasswordFor(m => m.Password) @Html.ValidationMessageFor(model => model.Password)</dd>
         </dl>
 
-        <button type="submit" class="btn btn-secondary" id="submit">Submit</button>
+        <button type="submit" class="btn btn-secondary" id="submit">Login</button>
     }
+
+    <hr />
+    <p>Don't have an account?</p>
+    <a class="btn btn-secondary btn-sm" href="@Url.Action("RegisterUser")">Sign up</a>
 </div>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Friendface.Core;
+using Friendface.Web.Hubs;
 using Friendface.Web.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -40,16 +41,10 @@ namespace Friendface.Web
                 options.LoginPath = "/Friendface/Login";
             });
 
-            services.AddDistributedMemoryCache();
-
-            services.AddSession(options =>
-            {
-                // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.HttpOnly = true;
-            });
+            services.AddSignalR();
 
             services.AddMvc();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,7 +66,10 @@ namespace Friendface.Web
             app.UseCookiePolicy();
             app.UseAuthentication();
 
-            app.UseSession();
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chatHub");
+            });
 
             app.UseMvc(routes =>
             {

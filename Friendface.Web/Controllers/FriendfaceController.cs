@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Friendface.Web.Controllers
 {
-    // TODO: profiil index lehele koos sõprade nimekirjaga, unfriend
+    // TODO: chat esilehele: kell, autor ja message
     [Authorize]
     public class FriendfaceController : Controller
     {
