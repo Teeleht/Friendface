@@ -32,6 +32,11 @@
     @if (Model.IsFriend)
     {
         <p>Friends</p>
+        using (Html.BeginForm("DeleteFriendship", "Friendface", FormMethod.Post))
+        {
+            @Html.HiddenFor(x => x.User.Id)
+            <button type="submit" class="btn btn-secondary">Unfriend</button>
+        }
     }
     else if (Model.IsMe)
     {
@@ -42,7 +47,6 @@
         using (Html.BeginForm("CreateFriendship", "Friendface", FormMethod.Post))
         {
             @Html.HiddenFor(x => x.User.Id)
-
             <button type="submit" class="btn btn-secondary">Add friend</button>
         }
     }

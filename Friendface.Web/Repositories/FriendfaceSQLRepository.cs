@@ -33,6 +33,12 @@ namespace Friendface.Web.Repositories
             return friendship.Id;
         }
 
+        public void DeleteFriendship(Friendship friendship)
+        {
+            context.Friendships.Remove(friendship);
+            context.SaveChanges();
+        }
+
         public int CreateUser(string username, string password, DateTime birthday, string description, string address, string email, string gender)
         {
             var user = new User
@@ -81,17 +87,19 @@ namespace Friendface.Web.Repositories
             return context.Users.First(x => x.Id == id);
         }
 
-        public void Update(User user)
+        public void Update(int id, string username, string password, DateTime birthday, string description, string address, string email, string gender)
         {
-            var u = context.Users.First(x => x.Id == user.Id);
+            var user = context.Users.First(x => x.Id == id);
 
-            u.Username = user.Username;
-            u.Password = user.Password;
-            u.Email = user.Email;
-            u.Address = user.Address;
-            u.Birthday = user.Birthday;
-            u.Description = user.Description;
-            u.Gender = user.Gender;           
+            user.Username = username;
+            user.Password = password;
+            user.Email = email;
+            user.Address = address;
+            user.Birthday = birthday;
+            user.Description = description;
+            user.Gender = gender;
+
+            context.SaveChanges();
         }
 
     }

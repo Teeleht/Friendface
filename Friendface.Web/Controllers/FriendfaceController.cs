@@ -87,12 +87,23 @@ namespace Friendface.Web.Controllers
         {
             //friendfaceService.ClearFriends(); // clear database
             //friendfaceService.ClearUsers();
-            var userB = friendfaceService.GetUser(model.User.Id);
             var userA = friendfaceService.GetUser(User.Identity.Name);
-                
+            var userB = friendfaceService.GetUser(model.User.Id);
+                          
             friendfaceService.CreateFriendship(userA, userB, DateTime.Now);
             return RedirectToAction("Index");
 
+        }
+
+        [HttpPost]
+        public IActionResult DeleteFriendship(DetailModel model)
+        {
+            var userA = friendfaceService.GetUser(User.Identity.Name);
+            var userB = friendfaceService.GetUser(model.User.Id);
+
+            friendfaceService.DeleteFriendship(userA, userB);
+
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -123,7 +134,7 @@ namespace Friendface.Web.Controllers
             }
             else
             {
-                friendfaceService.ChangeProfile(model.Id);
+                friendfaceService.ChangeProfile(model.Id, model.Username, model.Password, model.Birthday, model.Description, model.Address, model.Email, model.Gender);
                 return RedirectToAction("Index");
             }
         }

@@ -35,6 +35,16 @@ namespace Friendface.Core
             friendfaceRepository.CreateFriendship(userA, userB, added);
         }
 
+        public void DeleteFriendship(User userA, User userB)
+        {
+            var friendships = friendfaceRepository.GetFriendships().FindAll(x => x.UserA == userA && x.UserB == userB || x.UserA == userB && x.UserB == userA);
+
+            foreach (var friendship in friendships)
+            {
+                friendfaceRepository.DeleteFriendship(friendship);
+            }            
+        }
+
         public void ClearFriends()
         {
             friendfaceRepository.ClearFriends();
@@ -59,11 +69,9 @@ namespace Friendface.Core
             return friendfaceRepository.GetActive().First(x => x.Username == username);
         }
 
-        public void ChangeProfile(int id)
+        public void ChangeProfile(int id, string username, string password, DateTime birthday, string description, string address, string email, string gender)
         {
-            var user = friendfaceRepository.GetUserById(id);
-
-            friendfaceRepository.Update(user);
+            friendfaceRepository.Update(id, username, password, birthday, description, address, email, gender);
         } 
     }
 }
