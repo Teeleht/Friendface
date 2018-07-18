@@ -27,10 +27,21 @@ namespace Friendface.Web.Hubs
 
         public override Task OnConnectedAsync()
         {
-            if (messages.Count > 0)
+            if (messages.Count > 0 && messages.Count < 5)
             {
-                var lastMessage = messages[messages.Count - 1].Content;
-                Clients.Caller.SendAsync(lastMessage);               
+                for (int i = 1; i <= messages.Count; i++)
+                {
+                    var lastMessage = messages[messages.Count - i];
+                    Clients.Caller.SendAsync("ReceiveMessage", lastMessage.Username, lastMessage.Content, lastMessage.Time);
+                }             
+            }
+            else if (messages.Count > 0 && messages.Count >= 5)
+            {
+                for (int i = 1; i <= 5; i++)
+                {
+                    var lastMessage = messages[messages.Count - i];
+                    Clients.Caller.SendAsync("ReceiveMessage", lastMessage.Username, lastMessage.Content, lastMessage.Time);
+                }
             }
             return base.OnConnectedAsync();
         }
