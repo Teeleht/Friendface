@@ -30,11 +30,13 @@ namespace Friendface.Web.Controllers
         {
             var user = friendfaceService.GetUser(User.Identity.Name);
             var friendships = friendfaceService.ShowFriendships().Where(x => x.UserA.Id == user.Id || x.UserB.Id == user.Id);
+            var posts = friendfaceService.GetPosts().Where(x => x.AuthorId == user.Id);
 
             var model = new IndexModel
             {
                 User = user,
                 Friendships = friendships,
+                Posts = posts,
             };
 
             return View(model);
@@ -135,6 +137,28 @@ namespace Friendface.Web.Controllers
             else
             {
                 friendfaceService.ChangeProfile(model.Id, model.Username, model.Password, model.Birthday, model.Description, model.Address, model.Email, model.Gender);
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpGet]
+        public IActionResult CreatePost()
+        {
+            var post = new Post();
+            return View(post);
+        }
+
+        [HttpPost]
+        public IActionResult CreatePost(Post post)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(post);
+            }
+            else
+            {
+                var author = friendfaceService.GetUser(User.Identity.Name);
+                friendfaceService.CreatePost(author.Id, post.Content, post.Title, DateTime.Now);
                 return RedirectToAction("Index");
             }
         }

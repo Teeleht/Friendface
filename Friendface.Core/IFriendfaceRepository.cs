@@ -12,10 +12,12 @@ namespace Friendface.Core
         int CreateFriendship(User userA, User userB, DateTime added);
         void DeleteFriendship(Friendship friendship);
         List<Friendship> GetFriendships();
+        List<Post> GetPosts();
         void ClearFriends();
         void ClearUsers();
         User GetUserById(int id);
         void Update(int id, string username, string password, DateTime birthday, string description, string address, string email, string gender);
+        int CreatePost(int userId, string content, string title, DateTime releaseDate);
 
     }
 }

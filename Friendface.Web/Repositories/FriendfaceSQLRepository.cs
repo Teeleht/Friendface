@@ -26,6 +26,9 @@ namespace Friendface.Web.Repositories
                 UserB = userB,
                 Added = added,
             };
+           
+            userA.Friendships.Add(friendship);
+            userB.Friendships.Add(friendship);
 
             context.Friendships.Add(friendship);
             context.SaveChanges();
@@ -70,6 +73,11 @@ namespace Friendface.Web.Repositories
                 .ToList();
         }
 
+        public List<Post> GetPosts()
+        {
+            return context.Posts.ToList();
+        }
+
         public void ClearFriends()
         {
             context.Friendships.RemoveRange(context.Friendships);
@@ -100,6 +108,23 @@ namespace Friendface.Web.Repositories
             user.Gender = gender;
 
             context.SaveChanges();
+        }
+
+        public int CreatePost(int userId, string content, string title, DateTime releaseDate)
+        {
+            var user = context.Users.First(x => x.Id == userId);
+            var post = new Post
+            {
+                Author = user,
+                AuthorId = userId,
+                Content = content,
+                ReleaseDate = releaseDate,
+                Title = title,                
+            };
+            context.Posts.Add(post);
+            context.SaveChanges();
+
+            return post.Id;
         }
 
     }

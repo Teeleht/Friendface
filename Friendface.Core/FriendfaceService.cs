@@ -25,6 +25,11 @@ namespace Friendface.Core
             return friendfaceRepository.GetFriendships();
         }
 
+        public List<Post> GetPosts()
+        {
+            return friendfaceRepository.GetPosts();
+        }
+
         public void CreateUser(string username, string password, DateTime birthday, string description, string address, string email, string gender)
         {
             friendfaceRepository.CreateUser(username, password, birthday, description, address, email, gender);
@@ -72,6 +77,11 @@ namespace Friendface.Core
         public void ChangeProfile(int id, string username, string password, DateTime birthday, string description, string address, string email, string gender)
         {
             friendfaceRepository.Update(id, username, password, birthday, description, address, email, gender);
-        } 
+        }
+
+        public void CreatePost(int userId, string content, string title, DateTime releaseDate)
+        {
+            friendfaceRepository.CreatePost(userId, content, title, releaseDate);
+        }
     }
 }

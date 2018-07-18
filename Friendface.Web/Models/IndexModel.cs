@@ -10,5 +10,6 @@ namespace Friendface.Web.Models
     {
         public User User { get; set; }
         public IEnumerable<Friendship> Friendships { get; set; }
+        public IEnumerable<Post> Posts { get; set; }
     }
 }
