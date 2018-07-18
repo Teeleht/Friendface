@@ -32,19 +32,19 @@
 
             <a class="nav-link" href="@Url.Action("AddedFriends")">All friendships</a>
 
-            <div class="row"> <!-- border h-100 d-inline-block" style="min-width: 300px; max-height: 100px -->
+            <div class="row bottom-row border">
+                <!-- border h-100 d-inline-block" style="min-width: 300px; max-height: 100px -->
                 <div>
-                    <ul id="messagesList" style="list-style-type:none; padding-left: 10px;"></ul>
+                    <ul class="anyClass" id="messagesList"></ul>
+                </div>
+
+                <div class="input-group">
+                    <input id="messageInput" />
+                    <div class="input-group-append">
+                        <button id="sendButton" class="btn btn-secondary btn-sm">Send</button>
+                    </div>
                 </div>
             </div>
-
-            <div class="input-group" id="footer">
-                <input id="messageInput" />
-                <div class="input-group-append">
-                    <button id="sendButton" class="btn btn-secondary btn-sm">Send</button>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>

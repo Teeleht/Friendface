@@ -11,10 +11,10 @@ namespace Friendface.Web.Hubs
         private static List<Message> messages = new List<Message>();
         public async Task SendMessage(string message)
         {
-            string username = Context.User.Identity.Name;
-            string time = DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
+            var username = Context.User.Identity.Name;
+            var time = DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
 
-            Message newMessage = new Message
+            var newMessage = new Message
             {
                 Username = username,
                 Time = time,
@@ -27,21 +27,11 @@ namespace Friendface.Web.Hubs
 
         public override Task OnConnectedAsync()
         {
-            if (messages.Count > 0 && messages.Count < 5)
+            var lastMessages = messages.OrderByDescending(x => x.Time).Take(5).ToList().OrderBy(x => x.Time);
+
+            foreach (var message in lastMessages)
             {
-                for (int i = 1; i <= messages.Count; i++)
-                {
-                    var lastMessage = messages[messages.Count - i];
-                    Clients.Caller.SendAsync("ReceiveMessage", lastMessage.Username, lastMessage.Content, lastMessage.Time);
-                }             
-            }
-            else if (messages.Count > 0 && messages.Count >= 5)
-            {
-                for (int i = 1; i <= 5; i++)
-                {
-                    var lastMessage = messages[messages.Count - i];
-                    Clients.Caller.SendAsync("ReceiveMessage", lastMessage.Username, lastMessage.Content, lastMessage.Time);
-                }
+                Clients.Caller.SendAsync("ReceiveMessage", message.Username, message.Content, message.Time);
             }
             return base.OnConnectedAsync();
         }
