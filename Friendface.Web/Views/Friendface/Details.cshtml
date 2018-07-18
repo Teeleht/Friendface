@@ -7,46 +7,61 @@
 
 <div class="container">
     <h3>@Model.User.Username</h3>
-
     <hr />
-    <dl class="dl-horizontal">
 
-        <dt>Birthday</dt>
-        <dd>@Model.User.Birthday.ToString("yyyy-MM-dd")</dd>
+    <div class="row">
+        <div class="col-md-8">
+            <dl class="dl-horizontal">
 
-        <dt>Email</dt>
-        <dd>@Model.User.Email</dd>
+                <dt>Birthday</dt>
+                <dd>@Model.User.Birthday.ToString("yyyy-MM-dd")</dd>
 
-        <dt>Address</dt>
-        <dd>@Model.User.Address</dd>
+                <dt>Email</dt>
+                <dd>@Model.User.Email</dd>
 
-        <dt>Gender</dt>
-        <dd>@Model.User.Gender</dd>
+                <dt>Address</dt>
+                <dd>@Model.User.Address</dd>
 
-        <dt>Description</dt>
-        <dd>@Model.User.Description</dd>
-    </dl>
+                <dt>Gender</dt>
+                <dd>@Model.User.Gender</dd>
 
-    @if (Model.IsFriend)
-    {
-        <p>Friends</p>
-        using (Html.BeginForm("DeleteFriendship", "Friendface", FormMethod.Post))
-        {
-            @Html.HiddenFor(x => x.User.Id)
-            <button type="submit" class="btn btn-secondary">Unfriend</button>
-        }
-    }
-    else if (Model.IsMe)
-    {
-        <p></p>
-    }
-    else
-    {
-        using (Html.BeginForm("CreateFriendship", "Friendface", FormMethod.Post))
-        {
-            @Html.HiddenFor(x => x.User.Id)
-            <button type="submit" class="btn btn-secondary">Add friend</button>
-        }
-    }
+                <dt>Description</dt>
+                <dd>@Model.User.Description</dd>
+            </dl>
 
+
+            @if (Model.IsFriend)
+            {
+                <p>Friends</p>
+                using (Html.BeginForm("DeleteFriendship", "Friendface", FormMethod.Post))
+                {
+                    @Html.HiddenFor(x => x.User.Id)
+                    <button type="submit" class="btn btn-secondary">Unfriend</button>
+                }
+            }
+            else if (Model.IsMe)
+            {
+                <p></p>
+            }
+            else
+            {
+                using (Html.BeginForm("CreateFriendship", "Friendface", FormMethod.Post))
+                {
+                    @Html.HiddenFor(x => x.User.Id)
+                    <button type="submit" class="btn btn-secondary">Add friend</button>
+                }
+            }
+        </div>
+        <div class="col-md-4">
+            <h4>Posts</h4>
+            @foreach (var post in Model.Posts)
+            {
+                <div class="border post">
+                    <p><b>@post.Title</b></p>
+                    <p>@post.ReleaseDate</p>
+                    <p>@post.Content</p>
+                </div>
+            }
+        </div>
+    </div>
 </div>

@@ -5,28 +5,21 @@
 }
 
 <div class="container">
+    <h2>@Model.User.Username</h2>
+    <hr />
+
     <div class="row">
         <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-10">
-                    <h2>@Model.User.Username</h2>
-                </div>
-                <div class="col-md-2">
-                    <a class="btn btn-secondary btn-sm ml-auto" href="@Url.Action("CreatePost")">New post</a>
-                </div>
-                
-            </div>
-            
 
             <p>@Model.User.Email</p>
             <p>@Model.User.Birthday.ToString("yyyy-MM-dd")</p>
             <p>@Model.User.Address</p>
             <p>@Model.User.Gender</p>
 
-
+            <a class="btn btn-secondary btn-sm ml-auto" href="@Url.Action("CreatePost")">New post</a>
             @foreach (var post in Model.Posts)
             {
-                <div class="col-sm-4 border">
+                <div class="border post">
                     <p><b>@post.Title</b></p>
                     <p>@post.ReleaseDate</p>
                     <p>@post.Content</p>
@@ -38,18 +31,18 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <h4>My friends</h4>
-                    <span class="badge badge-primary badge-pill">@Model.Friendships.Count()</span>
+                    <span class="badge badge-pill orange">@Model.Friendships.Count()</span>
                 </li>
 
                 @foreach (var friendship in Model.Friendships)
                 {
                     <li class="list-group-item">
-                        <a href="@Url.Action("Details", new { userId = friendship.UserB.Id })">@friendship.UserB.Username</a>
+                        <a class="orange-text" href="@Url.Action("Details", new { userId = friendship.UserB.Id })">@friendship.UserB.Username</a>
                     </li>
                 }
             </ul>
 
-            <a class="nav-link" href="@Url.Action("AddedFriends")">All friendships</a>
+            <a class="nav-link orange-text" href="@Url.Action("AddedFriends")">All friendships</a>
 
             <div class="row bottom-row border">
                 <!-- border h-100 d-inline-block" style="min-width: 300px; max-height: 100px -->

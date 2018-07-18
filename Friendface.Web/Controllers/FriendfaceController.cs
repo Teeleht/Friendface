@@ -56,6 +56,7 @@ namespace Friendface.Web.Controllers
         {
             var friend = friendfaceService.GetUser(userId);
             var user = friendfaceService.GetUser(User.Identity.Name);
+            var posts = friendfaceService.GetPosts().Where(x => x.AuthorId == userId);
 
             var areFriends = friendfaceService.AreFriends(user.Id, friend.Id);
             var isMe = false;
@@ -69,7 +70,8 @@ namespace Friendface.Web.Controllers
             {
                 IsFriend = areFriends,
                 User = friend,
-                IsMe = isMe,     
+                IsMe = isMe,
+                Posts = posts,
             };
             return View(model);
 
