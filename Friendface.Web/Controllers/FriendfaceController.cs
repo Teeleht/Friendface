@@ -104,17 +104,7 @@ namespace Friendface.Web.Controllers
             friendfaceService.DeleteFriendship(userA, userB);
 
             return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public IActionResult DeletePost(DetailModel model)
-        {
-
-            var post = model.User.Posts;
-
-            //friendfaceService.DeletePost(post);
-            return RedirectToAction("Index");
-        }
+        }      
 
         [HttpGet]
         public IActionResult ChangeProfile()
@@ -169,6 +159,16 @@ namespace Friendface.Web.Controllers
                 friendfaceService.CreatePost(author.Id, post.Content, post.Title, DateTime.Now);
                 return RedirectToAction("Index");
             }
+        }
+
+        [HttpPost]
+        public IActionResult DeletePost(int postId)
+        {
+            var user = friendfaceService.GetUser(User.Identity.Name);
+            var post = user.Posts.First(x => x.Id == postId);
+
+            friendfaceService.DeletePost(post);
+            return RedirectToAction("Index");
         }
 
         // create new user
