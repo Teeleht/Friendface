@@ -83,5 +83,10 @@ namespace Friendface.Core
         {
             friendfaceRepository.CreatePost(userId, content, title, releaseDate);
         }
+
+        public void DeletePost(Post post)
+        {
+            friendfaceRepository.DeletePost(post);
+        }
     }
 }

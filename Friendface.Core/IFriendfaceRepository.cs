@@ -18,6 +18,7 @@ namespace Friendface.Core
         User GetUserById(int id);
         void Update(int id, string username, string password, DateTime birthday, string description, string address, string email, string gender);
         int CreatePost(int userId, string content, string title, DateTime releaseDate);
+        void DeletePost(Post post);
 
     }
 }

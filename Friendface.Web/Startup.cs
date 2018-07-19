@@ -12,11 +12,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace Friendface.Web
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,6 +35,7 @@ namespace Friendface.Web
 
             services.AddDbContext<FriendfaceContext>(options =>
                    options.UseSqlite(Configuration.GetConnectionString("FriendfaceContext")));
+
 
             services.AddTransient<IFriendfaceRepository, FriendfaceSQLRepository>();
             services.AddTransient<FriendfaceService>();

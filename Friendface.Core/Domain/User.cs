@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text;
 
 namespace Friendface.Core.Domain
@@ -16,7 +17,7 @@ namespace Friendface.Core.Domain
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Birthday is required")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime Birthday { get; set; }
 
         [StringLength(300)]
@@ -29,6 +30,8 @@ namespace Friendface.Core.Domain
         public string Gender { get; set; }
         public List<Post> Posts { get; set; }
         public List<Comment> Comments { get; set; }
-        public List<Friendship> Friendships { get; set; }
+        public ICollection<Friendship> FriendshipsA { get; set; }
+        public ICollection<Friendship> FriendshipsB { get; set; }
+        public IEnumerable<Friendship> Friendships => FriendshipsA?.Concat(FriendshipsB);
     }
 }

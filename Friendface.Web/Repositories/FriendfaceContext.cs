@@ -20,9 +20,10 @@ namespace Friendface.Web.Repositories
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<User>().HasMany<Friendship>(x => x.Friendships);
-            modelBuilder.Entity<Friendship>().HasOne<User>(x => x.UserA);
-            modelBuilder.Entity<Friendship>().HasOne<User>(x => x.UserB);
+            modelBuilder.Entity<User>().HasMany<Friendship>(x => x.FriendshipsA).WithOne( x => x.UserA);
+            modelBuilder.Entity<User>().HasMany<Friendship>(x => x.FriendshipsB).WithOne(x => x.UserB);
+            modelBuilder.Entity<User>().Ignore(x => x.Friendships);
+
 
 
         }

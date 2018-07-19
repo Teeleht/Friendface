@@ -26,9 +26,6 @@ namespace Friendface.Web.Repositories
                 UserB = userB,
                 Added = added,
             };
-           
-            userA.Friendships.Add(friendship);
-            userB.Friendships.Add(friendship);
 
             context.Friendships.Add(friendship);
             context.SaveChanges();
@@ -53,6 +50,7 @@ namespace Friendface.Web.Repositories
                 Address = address,
                 Email = email,
                 Gender = gender,
+
             };
             context.Users.Add(user);
             context.SaveChanges();
@@ -62,7 +60,7 @@ namespace Friendface.Web.Repositories
 
         public List<User> GetActive()
         {
-            return context.Users.ToList();
+            return context.Users.Include(x => x.FriendshipsA).Include(x => x.FriendshipsB).Include(x => x.Posts).ToList();
         }
 
         public List<Friendship> GetFriendships()
@@ -75,7 +73,7 @@ namespace Friendface.Web.Repositories
 
         public List<Post> GetPosts()
         {
-            return context.Posts.ToList();
+            return context.Posts.Include(x => x.Author).ToList();
         }
 
         public void ClearFriends()
@@ -127,5 +125,10 @@ namespace Friendface.Web.Repositories
             return post.Id;
         }
 
+        public void DeletePost(Post post)
+        {
+            context.Remove(post);
+            context.SaveChanges();
+        }
     }
 }

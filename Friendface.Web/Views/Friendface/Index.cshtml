@@ -12,17 +12,21 @@
         <div class="col-md-8">
 
             <p>@Model.User.Email</p>
-            <p>@Model.User.Birthday.ToString("yyyy-MM-dd")</p>
+            <p>@Model.User.Birthday.ToString("dd-MM-yyyy")</p>
             <p>@Model.User.Address</p>
             <p>@Model.User.Gender</p>
 
             <a class="btn btn-secondary btn-sm ml-auto" href="@Url.Action("CreatePost")">New post</a>
-            @foreach (var post in Model.Posts)
+            @foreach (var post in Model.User.Posts)
             {
                 <div class="border post">
                     <p><b>@post.Title</b></p>
                     <p>@post.ReleaseDate</p>
                     <p>@post.Content</p>
+                    @using (Html.BeginForm("DeletePost", "Friendface", FormMethod.Post))
+                    {
+                        <button type="submit" class="btn btn-secondary btn-sm">Delete</button>
+                    }
                 </div>
             }
         </div>

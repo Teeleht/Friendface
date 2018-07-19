@@ -29,14 +29,12 @@ namespace Friendface.Web.Controllers
         public IActionResult Index()
         {
             var user = friendfaceService.GetUser(User.Identity.Name);
-            var friendships = friendfaceService.ShowFriendships().Where(x => x.UserA.Id == user.Id || x.UserB.Id == user.Id);
-            var posts = friendfaceService.GetPosts().Where(x => x.AuthorId == user.Id);
+            var friendships = user.Friendships;
 
             var model = new IndexModel
             {
                 User = user,
                 Friendships = friendships,
-                Posts = posts,
             };
 
             return View(model);
@@ -56,7 +54,6 @@ namespace Friendface.Web.Controllers
         {
             var friend = friendfaceService.GetUser(userId);
             var user = friendfaceService.GetUser(User.Identity.Name);
-            var posts = friendfaceService.GetPosts().Where(x => x.AuthorId == userId);
 
             var areFriends = friendfaceService.AreFriends(user.Id, friend.Id);
             var isMe = false;
@@ -71,7 +68,6 @@ namespace Friendface.Web.Controllers
                 IsFriend = areFriends,
                 User = friend,
                 IsMe = isMe,
-                Posts = posts,
             };
             return View(model);
 
@@ -107,6 +103,16 @@ namespace Friendface.Web.Controllers
 
             friendfaceService.DeleteFriendship(userA, userB);
 
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult DeletePost(DetailModel model)
+        {
+
+            var post = model.User.Posts;
+
+            //friendfaceService.DeletePost(post);
             return RedirectToAction("Index");
         }
 
@@ -259,6 +265,7 @@ namespace Friendface.Web.Controllers
             await HttpContext.SignOutAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index");
+            
         }
 
         
