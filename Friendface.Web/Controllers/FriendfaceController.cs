@@ -171,6 +171,22 @@ namespace Friendface.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult CreateComment()
+        {
+            var comment = new Comment();
+            return View(comment);
+        }
+
+        [HttpPost]
+        public IActionResult CreateComment(DetailModel comment, int postId)
+        {
+            var author = friendfaceService.GetUser(User.Identity.Name);
+            var content = comment.CommentContent;
+            friendfaceService.CreateComment(author.Id, postId, content);
+            return RedirectToAction("Index");
+        }
+
         // create new user
         [HttpGet]
         [AllowAnonymous]

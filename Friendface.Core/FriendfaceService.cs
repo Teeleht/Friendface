@@ -25,7 +25,7 @@ namespace Friendface.Core
             return friendfaceRepository.GetFriendships();
         }
 
-        public List<Post> GetPosts()
+        public IEnumerable<Post> GetPosts()
         {
             return friendfaceRepository.GetPosts();
         }
@@ -88,5 +88,15 @@ namespace Friendface.Core
         {
             friendfaceRepository.DeletePost(post);
         }
+        public IEnumerable<Comment> ShowComments()
+        {
+            return friendfaceRepository.GetComments();
+        }
+
+        public void CreateComment(int userId, int postId, string content)
+        {
+            friendfaceRepository.CreateComment(userId, postId, content);
+        }
     }
+
 }

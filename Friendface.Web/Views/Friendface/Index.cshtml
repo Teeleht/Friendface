@@ -19,14 +19,37 @@
             <a class="btn btn-secondary btn-sm ml-auto" href="@Url.Action("CreatePost")">New post</a>
             @foreach (var post in Model.User.Posts)
             {
-            <div class="border post">
-                <p><b>@post.Title</b></p>
-                <p>@post.ReleaseDate</p>
-                <p>@post.Content</p>
-                @using (Html.BeginForm("DeletePost", "Friendface", new { postId = post.Id }, FormMethod.Post))
-                {
-                    <button type="submit" class="btn btn-secondary btn-sm">Delete</button>
-                }
+            <div class="border post-box">
+                <nav class="orange">
+                    <div class="post-text text-uppercase post-title">
+                        <h5><strong>@post.Title</strong></h5>
+                    </div>
+                </nav>
+                <div class="post-text">
+                    <p class="small-text">@post.ReleaseDate</p>
+                    <p>@post.Content</p>
+
+                    @using (Html.BeginForm("DeletePost", "Friendface", new { postId = post.Id }, FormMethod.Post))
+                    {
+                        <button type="submit" class="btn btn-secondary btn-sm">Delete</button>
+                    }
+
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Comments
+                        </button>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <div class="input-group">
+                                <input/>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-secondary btn-sm">Comment</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
             }
         </div>
@@ -48,16 +71,22 @@
 
             <a class="nav-link orange-text" href="@Url.Action("AddedFriends")">All friendships</a>
 
-            <div class="row bottom-row border">
-                <!-- border h-100 d-inline-block" style="min-width: 300px; max-height: 100px -->
-                <div>
-                    <ul class="anyClass" id="messagesList"></ul>
-                </div>
+            <div class="row bottom-row ">
+                <div class="btn-group dropup">
+                    <button type="button" class="btn btn-secondary btn-sm dropdown-toggle message-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Messages
+                    </button>
+                    <div class="dropdown-menu">
+                        <div>
+                            <ul class="anyClass" id="messagesList"></ul>
+                        </div>
 
-                <div class="input-group">
-                    <input id="messageInput" />
-                    <div class="input-group-append">
-                        <button id="sendButton" class="btn btn-secondary btn-sm">Send</button>
+                        <div class="input-group">
+                            <input id="messageInput" />
+                            <div class="input-group-append">
+                                <button id="sendButton" class="btn btn-secondary btn-sm">Send</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

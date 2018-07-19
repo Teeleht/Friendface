@@ -60,7 +60,12 @@ namespace Friendface.Web.Repositories
 
         public List<User> GetActive()
         {
-            return context.Users.Include(x => x.FriendshipsA).Include(x => x.FriendshipsB).Include(x => x.Posts).ToList();
+            return context.Users
+                .Include(x => x.FriendshipsA)
+                .Include(x => x.FriendshipsB)
+                .Include(x => x.Posts)
+                .Include(x => x.Comments)
+                .ToList();
         }
 
         public List<Friendship> GetFriendships()
@@ -73,7 +78,18 @@ namespace Friendface.Web.Repositories
 
         public List<Post> GetPosts()
         {
-            return context.Posts.Include(x => x.Author).ToList();
+            return context.Posts
+                .Include(x => x.Author)
+                .Include(x => x.Comments)
+                .ToList();
+        }
+
+        public List<Comment> GetComments()
+        {
+            return context.Comments
+                .Include(x => x.Post)
+                .Include(x => x.Author)
+                .ToList();
         }
 
         public void ClearFriends()
@@ -129,6 +145,24 @@ namespace Friendface.Web.Repositories
         {
             context.Remove(post);
             context.SaveChanges();
+        }
+
+        public int CreateComment(int userId, int postId, string content)
+        {
+            var author = context.Users.First(x => x.Id == userId);
+            var post = context.Posts.First(x => x.Id == postId);
+
+            var comment = new Comment
+            {
+                Author = author,
+                Post = post,
+                Content = content,
+            };
+
+            context.Comments.Add(comment);
+            context.SaveChanges();
+
+            return comment.Id;
         }
     }
 }

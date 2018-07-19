@@ -9,7 +9,7 @@
     <hr />
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <dl class="dl-horizontal">
 
                 <dt>Birthday</dt>
@@ -32,7 +32,7 @@
             @if (Model.IsFriend)
             {
                 <p>Friends</p>
-                using (Html.BeginForm("DeleteFriendship", "Friendface", FormMethod.Post))
+                @using (Html.BeginForm("DeleteFriendship", "Friendface", FormMethod.Post))
                 {
                     @Html.HiddenFor(x => x.User.Id)
                     <button type="submit" class="btn btn-secondary">Unfriend</button>
@@ -44,23 +44,54 @@
             }
             else
             {
-                using (Html.BeginForm("CreateFriendship", "Friendface", FormMethod.Post))
+                @using (Html.BeginForm("CreateFriendship", "Friendface", FormMethod.Post))
                 {
                     @Html.HiddenFor(x => x.User.Id)
                     <button type="submit" class="btn btn-secondary">Add friend</button>
                 }
             }
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <h4>Posts</h4>
             @foreach (var post in Model.User.Posts)
             {
-                <div class="border post">
-                    <p><b>@post.Title</b></p>
-                    <p>@post.ReleaseDate</p>
+            <div class="border post-box">
+                <nav class="orange">
+                    <div class="post-text text-uppercase post-title">
+                        <h5><strong>@post.Title</strong></h5>
+                    </div>
+                </nav>
+                <div class="post-text">
+                    <p class="small-text">@post.ReleaseDate</p>
                     <p>@post.Content</p>
-                </div>
-            }
+
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Comments
+                        </button>
+                        @using (Html.BeginForm("CreateComment", "Friendface", new { postId = post.Id }, FormMethod.Post))
+                        {
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <ul>
+                                    @foreach (var comment in post.Comments)
+                                    {
+                                        <li>@comment.Content</li>
+                                    }
+                                </ul>
+
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.CommentContent))
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-secondary btn-sm">Comment</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+            </div>
         </div>
+        }
     </div>
+</div>
 </div>
