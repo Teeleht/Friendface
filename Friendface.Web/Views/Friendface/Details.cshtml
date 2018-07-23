@@ -65,28 +65,32 @@
                     <p class="small-text">@post.ReleaseDate</p>
                     <p>@post.Content</p>
 
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Comments
-                        </button>
-                        @using (Html.BeginForm("CreateComment", "Friendface", new { postId = post.Id }, FormMethod.Post))
-                        {
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <ul>
-                                    @foreach (var comment in post.Comments)
-                                    {
-                                        <li>@comment.Content</li>
-                                    }
-                                </ul>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Comments
+                                </button>
 
-                                <div class="input-group">
-                                    @Html.TextBoxFor(m => m.CommentContent))
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-secondary btn-sm">Comment</button>
+                                
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <div id="comments" class="comments">
+                                        @foreach (var comment in post.Comments)
+                                        {
+                                            <p>@comment.Content</p>
+                                        }
+                                    </div>
+
+                                    <div class="input-group">
+                                        <input type="text" placeholder="" id="comment-content" data-post-id="@post.Id"/>
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-secondary btn-sm" id="comment-button">Comment</button>
+                                        </div>
                                     </div>
                                 </div>
+                                
                             </div>
-                        }
+                        </div>
                     </div>
 
             </div>

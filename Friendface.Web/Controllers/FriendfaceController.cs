@@ -179,12 +179,13 @@ namespace Friendface.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateComment(DetailModel comment, int postId)
+        public IActionResult CreateComment([FromBody]AddCommentModel model)
         {
             var author = friendfaceService.GetUser(User.Identity.Name);
-            var content = comment.CommentContent;
+            var content = model.CommentContent;
+            var postId = model.PostId;
             friendfaceService.CreateComment(author.Id, postId, content);
-            return RedirectToAction("Index");
+            return Ok();
         }
 
         // create new user

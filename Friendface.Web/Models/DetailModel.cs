@@ -12,8 +12,5 @@ namespace Friendface.Web.Models
         public User User { get; set; }
         public bool IsFriend { get; set; }
         public bool IsMe { get; set; }
-
-        [Required]
-        public string CommentContent { get; set; }
     }
 }

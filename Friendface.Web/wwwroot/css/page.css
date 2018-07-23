@@ -48,7 +48,7 @@ nav .navbar-nav li a {
 }
 
 .post-title {
-    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 .small-text {
     font-size: 10px;
@@ -59,3 +59,9 @@ nav .navbar-nav li a {
     padding-right: 110px;
 }
 
+.comments {
+    width: 520px;
+    height: 300px;
+    overflow-y: scroll;
+    padding-left: 10px;
+}

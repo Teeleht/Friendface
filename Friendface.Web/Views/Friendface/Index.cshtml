@@ -28,27 +28,30 @@
                 <div class="post-text">
                     <p class="small-text">@post.ReleaseDate</p>
                     <p>@post.Content</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            @using (Html.BeginForm("DeletePost", "Friendface", new { postId = post.Id }, FormMethod.Post))
+                            {
+                                <button type="submit" class="btn btn-secondary btn-sm">Delete</button>
+                            }
+                        </div>
+                        <div class="col-md-4">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Comments
+                                </button>
 
-                    @using (Html.BeginForm("DeletePost", "Friendface", new { postId = post.Id }, FormMethod.Post))
-                    {
-                        <button type="submit" class="btn btn-secondary btn-sm">Delete</button>
-                    }
-
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Comments
-                        </button>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <div class="input-group">
-                                <input/>
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-secondary btn-sm">Comment</button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <div class="input-group">
+                                        <input />
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-secondary btn-sm">Comment</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             }
