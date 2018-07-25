@@ -147,7 +147,7 @@ namespace Friendface.Web.Repositories
             context.SaveChanges();
         }
 
-        public int CreateComment(int userId, int postId, string content)
+        public int CreateComment(int userId, int postId, string content, DateTime releaseDate)
         {
             var author = context.Users.First(x => x.Id == userId);
             var post = context.Posts.First(x => x.Id == postId);
@@ -157,6 +157,7 @@ namespace Friendface.Web.Repositories
                 Author = author,
                 Post = post,
                 Content = content,
+                ReleaseDate = releaseDate,
             };
 
             context.Comments.Add(comment);

@@ -102,9 +102,9 @@ namespace Friendface.Core
             return friendfaceRepository.GetComments();
         }
 
-        public void CreateComment(int userId, int postId, string content)
+        public void CreateComment(int userId, int postId, string content, DateTime releaseDate)
         {
-            friendfaceRepository.CreateComment(userId, postId, content);
+            friendfaceRepository.CreateComment(userId, postId, content, releaseDate);
         }
     }
 

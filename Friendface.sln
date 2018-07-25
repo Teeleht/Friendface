@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friendface.Web", "Friendface.Web\Friendface.Web.csproj", "{C463731B-BA38-45B4-AAB8-17CC36513B8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Friendface.Web", "Friendface.Web\Friendface.Web.csproj", "{C463731B-BA38-45B4-AAB8-17CC36513B8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friendface.Core", "Friendface.Core\Friendface.Core.csproj", "{FE43B32D-04AC-4D30-ADFB-BB5EAE4C391B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Friendface.Core", "Friendface.Core\Friendface.Core.csproj", "{FE43B32D-04AC-4D30-ADFB-BB5EAE4C391B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friendface.UITest", "Friendface.UITest\Friendface.UITest.csproj", "{3EB4DEE3-AC2E-4CD4-BC92-A68B4376CA7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{FE43B32D-04AC-4D30-ADFB-BB5EAE4C391B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE43B32D-04AC-4D30-ADFB-BB5EAE4C391B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE43B32D-04AC-4D30-ADFB-BB5EAE4C391B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EB4DEE3-AC2E-4CD4-BC92-A68B4376CA7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EB4DEE3-AC2E-4CD4-BC92-A68B4376CA7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EB4DEE3-AC2E-4CD4-BC92-A68B4376CA7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EB4DEE3-AC2E-4CD4-BC92-A68B4376CA7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

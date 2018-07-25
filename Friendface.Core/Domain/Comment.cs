@@ -10,5 +10,6 @@ namespace Friendface.Core.Domain
         public string Content { get; set; }
         public User Author { get; set; }
         public Post Post { get; set; }
+        public DateTime ReleaseDate { get; set; }
     }
 }

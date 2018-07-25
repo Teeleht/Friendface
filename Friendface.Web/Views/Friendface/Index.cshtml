@@ -51,6 +51,8 @@
                                     <div class="comments">
                                         @foreach (var comment in post.Comments)
                                         {
+                                            <p><strong>@comment.Author.Username</strong></p>
+                                            <p class="small-text">@comment.ReleaseDate</p>
                                             <p>@comment.Content</p>
                                         }
                                     </div>

@@ -184,8 +184,9 @@ namespace Friendface.Web.Controllers
             var authorId = friendfaceService.GetUser(User.Identity.Name).Id;
             var postId = model.PostId;
             var content = model.CommentContent;
+            var releaseDate = DateTime.Now;
             
-            friendfaceService.CreateComment(authorId, postId, content);
+            friendfaceService.CreateComment(authorId, postId, content, releaseDate);
             return Ok();
         }
 
