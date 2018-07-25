@@ -22,19 +22,25 @@
             <div class="border post-box">
                 <nav class="orange">
                     <div class="post-text text-uppercase post-title">
-                        <h5><strong>@post.Title</strong></h5>
+                        <h6>
+                            <strong>@post.Title</strong>
+                            @using (Html.BeginForm("DeletePost", "Friendface", new { postId = post.Id }, FormMethod.Post, null, new { @class = "close-button"}))
+                            {
+                                <button type="submit" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            }
+                        </h6>
+                        
+
                     </div>
+                    
                 </nav>
                 <div class="post-text">
                     <p class="small-text">@post.ReleaseDate</p>
                     <p>@post.Content</p>
                     <div class="row">
-                        <div class="col-md-4">
-                            @using (Html.BeginForm("DeletePost", "Friendface", new { postId = post.Id }, FormMethod.Post))
-                            {
-                                <button type="submit" class="btn btn-secondary btn-sm">Delete</button>
-                            }
-                        </div>
+                        
                         <div class="col-md-4">
                             <div class="dropdown">
                                 <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

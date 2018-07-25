@@ -20,8 +20,7 @@
                     p.innerText = commentContent.value;
                     commentsElement.appendChild(p);
                     $(".comment-content").val('');
-                    
-                    
+                   
                 },
                 contentType: "application/json",
                 datatype: "json",
