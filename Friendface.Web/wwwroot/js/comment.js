@@ -1,10 +1,14 @@
 ﻿window.addEventListener("DOMContentLoaded", () => {
 
-    var commentButton = document.getElementById("comment-button");
+    var commentButtons = document.querySelectorAll(".comment-button");
 
-    function commentButtonClicked() {
-        var commentContent = document.getElementById("comment-content");
+    function commentButtonClicked(e) {
+        var button = e.target;
+
+        var commentContent = $(button).closest(".input-group").find('.comment-content')[0];
         var postId = commentContent.getAttribute("data-post-id");
+
+        var commentsElement = $(button).closest(".dropdown-menu").find(".comments")[0];
 
         if (commentContent.value) {
             $.ajax({
@@ -12,10 +16,11 @@
                 url: "/friendface/createcomment",
                 data: JSON.stringify({ PostId: parseInt(postId), CommentContent: commentContent.value }),
                 success: function (data) {
-                    var commentsElement = document.getElementById("comments");
                     var p = document.createElement("p");
                     p.innerText = commentContent.value;
                     commentsElement.appendChild(p);
+                    $(".comment-content").val('');
+                    
                     
                 },
                 contentType: "application/json",
@@ -24,7 +29,10 @@
         }
     }
 
-    if (commentButton)
+    for (var i = 0; i < commentButtons.length; i++) {
+        var commentButton = commentButtons[i];
         commentButton.addEventListener("click", commentButtonClicked, false);
+
+    }
 
 });

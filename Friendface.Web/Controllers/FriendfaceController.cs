@@ -29,12 +29,12 @@ namespace Friendface.Web.Controllers
         public IActionResult Index()
         {
             var user = friendfaceService.GetUser(User.Identity.Name);
-            var friendships = user.Friendships;
 
-            var model = new IndexModel
+            var model = new DetailModel
             {
                 User = user,
-                Friendships = friendships,
+                IsFriend = false,
+                IsMe = true,
             };
 
             return View(model);
@@ -65,8 +65,8 @@ namespace Friendface.Web.Controllers
 
             var model = new DetailModel
             {
-                IsFriend = areFriends,
                 User = friend,
+                IsFriend = areFriends,
                 IsMe = isMe,
             };
             return View(model);
@@ -181,10 +181,11 @@ namespace Friendface.Web.Controllers
         [HttpPost]
         public IActionResult CreateComment([FromBody]AddCommentModel model)
         {
-            var author = friendfaceService.GetUser(User.Identity.Name);
-            var content = model.CommentContent;
+            var authorId = friendfaceService.GetUser(User.Identity.Name).Id;
             var postId = model.PostId;
-            friendfaceService.CreateComment(author.Id, postId, content);
+            var content = model.CommentContent;
+            
+            friendfaceService.CreateComment(authorId, postId, content);
             return Ok();
         }
 

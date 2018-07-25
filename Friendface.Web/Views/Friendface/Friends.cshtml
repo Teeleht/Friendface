@@ -19,12 +19,14 @@
         <tbody>
             @foreach (var user in Model)
             {
-                <tr>
-                    <td>@user.Username</td>
-                    <td>@user.Birthday.ToString("dd-MM-yyyy")</td>
-                    <td>@user.Gender</td>
-                    <td><a class="orange-text" href="@Url.Action("Details", new { userId = user.Id })">View profile</a></td>
-                </tr>
+                
+                    <tr>
+                        <td>@user.Username</td>
+                        <td>@user.Birthday.ToString("dd-MM-yyyy")</td>
+                        <td>@user.Gender</td>
+                        <td><a class="orange-text" href="@Url.Action("Details", new { userId = user.Id })">View profile</a></td>
+                    </tr>
+                
             }
         </tbody>
     </table>

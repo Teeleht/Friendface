@@ -1,4 +1,4 @@
-﻿@model Friendface.Web.Models.IndexModel
+﻿@model Friendface.Web.Models.DetailModel
 
 @{
     Layout = "_Layout";
@@ -42,10 +42,17 @@
                                 </button>
 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <div class="comments">
+                                        @foreach (var comment in post.Comments)
+                                        {
+                                            <p>@comment.Content</p>
+                                        }
+                                    </div>
+
                                     <div class="input-group">
-                                        <input />
+                                        <input type="text" placeholder="" class="comment-content" data-post-id="@post.Id"/>
                                         <div class="input-group-append">
-                                            <button type="submit" class="btn btn-secondary btn-sm">Comment</button>
+                                            <button type="submit" class="btn btn-secondary btn-sm comment-button">Comment</button>
                                         </div>
                                     </div>
                                 </div>
@@ -61,10 +68,10 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <h4>My friends</h4>
-                    <span class="badge badge-pill orange">@Model.Friendships.Count()</span>
+                    <span class="badge badge-pill orange">@Model.User.Friendships.Count()</span>
                 </li>
 
-                @foreach (var friendship in Model.Friendships)
+                @foreach (var friendship in Model.User.Friendships)
                 {
                     <li class="list-group-item">
                         <a class="orange-text" href="@Url.Action("Details", new { userId = friendship.UserB.Id })">@friendship.UserB.Username</a>

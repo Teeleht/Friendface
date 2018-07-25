@@ -32,7 +32,16 @@ namespace Friendface.Core
 
         public void CreateUser(string username, string password, DateTime birthday, string description, string address, string email, string gender)
         {
-            friendfaceRepository.CreateUser(username, password, birthday, description, address, email, gender);
+            var allUsers = friendfaceRepository.GetActive();
+
+            if (allUsers.Any(x => x.Username == username))
+            {
+                throw new Exception("Username already exists");
+            }
+            else
+            {
+                friendfaceRepository.CreateUser(username, password, birthday, description, address, email, gender);
+            }
         }
 
         public void CreateFriendship(User userA, User userB, DateTime added)

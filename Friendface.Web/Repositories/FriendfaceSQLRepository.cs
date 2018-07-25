@@ -63,7 +63,7 @@ namespace Friendface.Web.Repositories
             return context.Users
                 .Include(x => x.FriendshipsA)
                 .Include(x => x.FriendshipsB)
-                .Include(x => x.Posts)
+                .Include(x => x.Posts).ThenInclude((Post x) => x.Comments)
                 .Include(x => x.Comments)
                 .ToList();
         }
