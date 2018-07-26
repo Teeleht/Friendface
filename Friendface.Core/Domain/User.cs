@@ -17,7 +17,6 @@ namespace Friendface.Core.Domain
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Birthday is required")]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime Birthday { get; set; }
 
         [StringLength(300)]

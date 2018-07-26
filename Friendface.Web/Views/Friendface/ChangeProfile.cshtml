@@ -26,7 +26,7 @@
             <dd>@Html.TextBoxFor(m => m.Gender)</dd>
 
             <dt>@Html.DisplayNameFor(model => model.Birthday)</dt>
-            <dd>@Html.TextBoxFor(m => m.Birthday, "{0:dd/MM/yyyy}") @Html.ValidationMessageFor(model => model.Birthday, null, new { @class = "text-danger" })</dd>
+            <dd>@Html.TextBoxFor(m => m.Birthday, "{0:yyyy-MM-dd}") @Html.ValidationMessageFor(model => model.Birthday, null, new { @class = "text-danger" })</dd>
 
             <dt>@Html.DisplayNameFor(model => model.Description)</dt>
             <dd>@Html.TextBoxFor(m => m.Description) @Html.ValidationMessageFor(model => model.Description)</dd>

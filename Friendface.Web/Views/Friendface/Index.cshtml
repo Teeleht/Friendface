@@ -49,7 +49,7 @@
 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <div class="comments">
-                                        @foreach (var comment in post.Comments)
+                                        @foreach (var comment in post.Comments.OrderBy(x => x.ReleaseDate))
                                         {
                                             <p><strong>@comment.Author.Username</strong></p>
                                             <p class="small-text">@comment.ReleaseDate</p>

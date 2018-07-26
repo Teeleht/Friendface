@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Friendface.Web.Controllers
 {
-    // TODO: chat esilehele: kell, autor ja message
     [Authorize]
     public class FriendfaceController : Controller
     {

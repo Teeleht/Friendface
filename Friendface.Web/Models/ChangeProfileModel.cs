@@ -12,8 +12,6 @@ namespace Friendface.Web.Models
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime Birthday { get; set; }
 
         [StringLength(300)]
